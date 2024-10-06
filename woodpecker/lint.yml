@@ -1,0 +1,7 @@
+pipeline:
+  go-lint:
+    image: golangci/golangci-lint
+    commands:
+      - golangci-lint run
+    when:
+      event: ["push", "pull_request", "manual"]
