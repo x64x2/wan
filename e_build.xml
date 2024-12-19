@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<iso_project image_name="game_e.iso" cue_sheet="game_e.cue" no_xa="0">
+
+  <track type="data">
+
+    <identifiers
+      system        = "PLAYSTATION"
+      application   = "PLAYSTATION"
+      volume        = "SAMPLE"
+      volume_set    = "SAMPLE"
+      publisher     = "YOURNAME"
+      data_preparer = "MKPSXISO"
+      copyright     = "COPYLEFT"
+    />
+
+    <license file="C:\psyq\CDGEN\LCNSFILE\LICENSEE.DAT"/>
+
+    <directory_tree>
+
+    <file name="system.cnf" type="data" source="system.cnf"/>
+    <file name="main.exe" type="data" source="bin/e_main.exe"/>
+
+    <!-- invisible dummy file -->
+    <dummy sectors="1024"/>
+
+    </directory_tree>
+
+  </track>
+
+</iso_project>
+
