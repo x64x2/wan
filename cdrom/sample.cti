@@ -1,0 +1,139 @@
+Define LicensePath C:\cdgen\lcnsfile\
+Define LicenseFile licensea.dat
+
+Define ProjectPath C:\projects\tests\sample\
+
+Disc CDROMXA_PSX ;the disk format
+
+	CatalogNumber 0000000000000
+
+	LeadIn XA ;lead in track (track 0)
+		Empty 1000 ;defines the lead in size (min 150)
+		PostGap 150 ;required gap at end of the lead in
+	EndTrack ;end of the lead in track
+
+	Track XA ;start of the XA (data) track
+
+		Pause 150 ;required pause in first track after the lead in
+
+		Volume ISO9660 ;define ISO 9660 volume
+			
+			SystemArea [LicensePath][LicenseFile]
+			
+			PrimaryVolume ;start point of primary volume
+
+				SystemIdentifier	"PLAYSTATION"	;required indetifier (do not change)
+				VolumeIdentifier	"SAMPLETEST"	;app specific identifiers (changeable)
+				VolumeSetIdentifier	"SAMPLETEST"	;app specific identifiers (changeable)
+				PublisherIdentifier	"YOURNAME"	;app specific identifiers (changeable)
+				DataPreparerIdentifier	"YOURNAME"	;app specific identifiers (changeable)
+				ApplicationIdentifier	"PLAYSTATION"	;required indetifier (do not change)
+
+				LPath ;path tables as specified for PlayStation
+				OptionalLpath
+				MPath
+				OptionalMpath
+
+				Hierarchy ;start point of root directory definition
+
+					XAFileAttributes  Form1 Audio
+					XAVideoAttributes ApplicationSpecific
+					XAAudioAttributes ADPCM_C Stereo ;you can also add 'Emphasis_On' before Stereo
+
+					;Directory AUDIO
+					;	File MUSIC.XA
+					;		XASource [ProjectPath]enter\filepath\here
+					;	EndFile
+					;
+					;	File SOUNDS.VH
+					;		XAFileAttributes Form1 Data
+					;		Source [ProjectPath]enter\filepath\here
+					;	EndFile
+					;
+					;	File SOUNDS.VB
+					;		XAFileAttributes Form1 Data
+					;		Source [ProjectPath]enter\filepath\here
+					;	EndFile
+					;EndDirectory
+
+					;Directory DATA
+					;	File SECTION1.PZL
+					;		XAFileAttributes Form1 Data
+					;		Source [ProjectPath]enter\filepath\here
+					;	EndFile
+					;	
+					;	File SECTION2.PZL
+					;		XAFileAttributes Form1 Data
+					;		Source [ProjectPath]enter\filepath\here
+					;	EndFile
+					;	
+					;	File SECTION3.PZL
+					;		XAFileAttributes Form1 Data
+					;		Source [ProjectPath]enter\filepath\here
+					;	EndFile
+					;	
+					;	File SECTION4.PZL
+					;		XAFileAttributes Form1 Data
+					;		Source [ProjectPath]enter\filepath\here
+					;	EndFile
+					;EndDirectory
+
+					;Directory MODELS
+					;	File NICOLE
+					;		XAFileAttributes Form1 Data
+					;		Source [ProjectPath]enter\filepath\here
+					;	EndFile
+					;
+					;	File TAFFY
+					;		XAFileAttributes Form1 Data
+					;		Source [ProjectPath]enter\filepath\here
+					;	EndFile
+					;
+					;	File VALDA
+					;		XAFileAttributes Form1 Data
+					;		Source [ProjectPath]enter\filepath\here
+					;	EndFile
+					;
+					;	File LYDIA
+					;		XAFileAttributes Form1 Data
+					;		Source [ProjectPath]enter\filepath\here
+					;	EndFile
+					;EndDirectory
+
+					File SYSTEM.CNF
+						XAFileAttributes Form1 Data
+						Source [ProjectPath]cdrom\system.cnf
+					EndFile
+
+					File MAIN.EXE
+						XAFileAttributes Form1 Data
+						Source [ProjectPath]bin\main.exe
+					EndFile
+
+					File PADDING.NUL ; to prevent the outer three minutes problem, but i'm not sure if this is correct...
+						XAFileAttributes Form1 Data
+						Source [ProjectPath]cdrom\padding.nul
+					EndFile
+
+				EndHierarchy ;ends the root directory definition
+
+			EndPrimaryVolume ;ends the primary volume definition 
+
+		EndVolume ;ends the ISO 9660 definition
+
+		Empty 300
+		PostGap 150 ;required to change the track type
+
+	EndTrack ;ends the track definition (end of the xa track)
+
+	;place as many audio tracks as you wish, but you must change the lead out to AUDIO instead of XA!
+	;Track AUDIO
+		;Pause 150
+		;Source  [ProjectPath]justin-bieber.raw ;raw cd-da audio
+	;EndTrack
+
+	LeadOut XA ;same data type as last track
+		Empty 150
+	EndTrack
+
+EndDisc
