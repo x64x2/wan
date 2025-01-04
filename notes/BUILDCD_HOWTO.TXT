@@ -1,3 +1,0 @@
-buildcd -isample.img sample.cti
-stripiso s 2352 sample.img sample.iso 
-discpatcher (america)

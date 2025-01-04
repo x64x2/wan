@@ -1,3 +1,0 @@
-insert the below line into the above line in
-bootedit:
-    by    motv l    3333        
